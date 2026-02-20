@@ -43,6 +43,21 @@ public class HomeController : Controller
         _products.DeleteProduct(product);
         return RedirectToAction(nameof(Index));
     }
+
+    //practice 1 code
+    [HttpGet]
+    public IActionResult UpdateAll()
+    {
+        ViewBag.UpdateAll = true;
+        ViewBag.Categories = _categories.GetAllCategories();
+
+        return View(nameof(Index), _products.GetProducts(new QueryOptions()));
+    }
+    [HttpPost]
+    public IActionResult UpdateAll(Product[] products)
+    {
+        _products.UpdateAll(products);
+        return RedirectToAction(nameof(Index));
+    }
 }
 
-/*сделать контроллер и представление категорий*/

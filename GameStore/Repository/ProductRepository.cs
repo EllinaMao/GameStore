@@ -57,9 +57,12 @@ namespace GameStore.Repository
                 product.CategoryId = requestProduct.CategoryId;
                 product.RetailPrice = requestProduct.RetailPrice;
                 product.PurchasePrice = requestProduct.PurchasePrice;
+                
             }
             _context.SaveChanges();
         }
+
+
         public void DeleteProduct(Product product)
         {
             _context.Products.Remove(product);

@@ -26,7 +26,24 @@
 			</div>
 			<div class="col">
 				@p.Category
-				<input class="form-control" name="Products[@i].Category" value="@p.Category">
+				<select class="form-control" name="products[@i].CategoryId" required>
+					<option value="">Выберите категорию</option>
+					@if (ViewBag.Categories != null)
+					{
+						foreach (Category category in ViewBag.Categories)
+						{
+							if (category.Id == p.CategoryId)
+							{
+								<option value="@category.Id" selected>@category.Name</option>
+							}
+							else
+							{
+								<option value="@category.Id">@category.Name</option>
+							}
+						}
+					}
+				</select>
+
 			</div>
 			<div class="col">
 				@p.PurchasePrice

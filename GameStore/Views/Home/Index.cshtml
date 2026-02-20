@@ -1,50 +1,65 @@
 ﻿@{
 	ViewData["Title"] = "Все товары";
 }
+@{
+	ViewBag.searches = new string[] { "Name", "Category.Name" };
+	ViewBag.sorts = new string[] { "Name", "Category.Name", "PurchasePrice", "RetailPrice" };
+}
 @model IEnumerable<Product>
  
 <h3 class="p-2 bg-primary text-white text-center">Товары</h3>
 <div class="container">
-	@{
-		ViewBag.searches = new string[] { "Name", "Category.Name" };
-		ViewBag.sorts = new string[] { "Name", "Category.Name", "PurchasePrice", "RetailPrice" };
-	}
 	@Html.Partial("_PageOptions", Model)
 
-	<div class="row">
-		<div class="col fw-bold">Название</div>
-		<div class="col fw-bold">Категория</div>
-		<div class="col fw-bold">Закупочная цена</div>
-		<div class="col fw-bold">Розничная цена</div>
-		<div class="col"></div>
-	</div>
-
-
-	@foreach (Product product in Model)
+	@if (ViewBag.UpdateAll != true)
 	{
-		<div class="row р-2">
-			<div class="col">@product.Name</div>
-			<div class="col">@product.Category.Name</div>
-			<div class="col text-right">@product.PurchasePrice</div>
-			<div class="col text-right">@product.RetailPrice</div>
-			<div class="col">
-				<form asp-action="DeleteProduct" method="post">
-					<input type="hidden" name="Id" value="@product.Id">
-					<a asp-action="UpdateProduct" asp-route-id="@product.Id" class="btn btn-outline-primary">Редактировать</a>
-					<button type="submit" class="btn btn-outline-danger">Удалить</button>
-				</form>
+		<div class="row">
+			<div class="col fw-bold">Название</div>
+			<div class="col fw-bold">Категория</div>
+			<div class="col fw-bold">Закупочная цена</div>
+			<div class="col fw-bold">Розничная цена</div>
+			<div class="col"></div>
+		</div>
+
+
+		@foreach (Product product in Model)
+		{
+			<div class="row р-2">
+				<div class="col">@product.Name</div>
+				<div class="col">@product.Category.Name</div>
+				<div class="col text-right">@product.PurchasePrice</div>
+				<div class="col text-right">@product.RetailPrice</div>
+				<div class="col">
+					<form asp-action="DeleteProduct" method="post">
+						<input type="hidden" name="Id" value="@product.Id">
+						<a asp-action="UpdateProduct" asp-route-id="@product.Id" class="btn btn-outline-primary">Редактировать</a>
+						<button type="submit" class="btn btn-outline-danger">Удалить</button>
+					</form>
+				</div>
 			</div>
+		}
+
+		<div class="text-center">
+			@Html.Partial("_Pages", Model)
+		</div>
+
+
+		<div class="text-center р-2">
+			<a asp-action="UpdateProduct" asp-route-id="0" class="btn btn-primary">Добавить</a>
+		</div>
+
+		@*
+	practice 1 code
+ *@
+
+		<div class="text-center">
+			<a asp-action="UpdateAll" class="btn btn-primary">Редактировать все</a>
 		</div>
 	}
-
-	<div class="text-center">
-		@Html.Partial("_Pages", Model)
-	</div>
-
-
-	<div class="text-center р-2">
-		<a asp-action="UpdateProduct" asp-route-id="0" class="btn btn-primary">Добавить</a>
-	</div>
+	else
+	{
+		@await Html.PartialAsync("_InlineEditor", Model)
  
+	}
 
 </div>
