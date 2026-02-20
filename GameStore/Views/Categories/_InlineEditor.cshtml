@@ -17,15 +17,15 @@
 		<div class="row">
 			<div class="col-1">
 				@p.Id
-				<input type="hidden" name="Products[@i].Id" value="@p.Id">
+				<input type="hidden" name="categories[@i].Id" value="@p.Id">
 			</div>
 			<div class="col">
 				@p.Name
-				<input class="form-control" name="Products[@i].Name" value="@p.Name">
+				<input class="form-control" name="categories[@i].Name" value="@p.Name">
 			</div>
 			<div class="col">
 				@p.Description
-				<input class="form-control" name="Products[@i].Category" value="@p.Description">
+				<input class="form-control" name="categories[@i].Description" value="@p.Description">
 			</div>
 
 		</div>

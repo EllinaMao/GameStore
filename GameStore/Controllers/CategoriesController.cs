@@ -1,5 +1,6 @@
 using GameStore.Interfaces;
 using GameStore.Models;
+using GameStore.Models.Pages;
 using Microsoft.AspNetCore.Mvc;
 
 public class CategoriesController : Controller
@@ -38,6 +39,21 @@ public class CategoriesController : Controller
     public IActionResult DeleteCategory(Category category)
     {
         _categories.DeleteCategory(category);
+        return RedirectToAction(nameof(Index));
+    }
+
+    //practice 1 code
+    [HttpGet]
+    public IActionResult UpdateAll()
+    {
+        ViewBag.UpdateAll = true;
+        return View(nameof(Index), _categories.GetAllCategories());
+    }
+
+    [HttpPost]
+    public IActionResult UpdateAll(Category[] categories)
+    {
+        _categories.UpdateAll(categories);
         return RedirectToAction(nameof(Index));
     }
 }

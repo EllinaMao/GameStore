@@ -42,7 +42,21 @@ namespace GameStore.Repository
 
             _context.SaveChanges();
         }
+        //practice
+        public void UpdateAll(Category[] categories)
+        {
+            Dictionary<int, Category> data = categories.ToDictionary(e => e.Id);
+            IEnumerable<Category> baseline = _context.Categories.Where(e => data.Keys.Contains(e.Id));
 
+            foreach (Category category in baseline)
+            {
+                Category requestCategory = data[category.Id];
+                category.Name = requestCategory.Name;
+                category.Description = requestCategory.Description;
+    
+            }
+            _context.SaveChanges();
+        }
 
         public void DeleteCategory(Category category)
         {
