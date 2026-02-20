@@ -11,5 +11,6 @@ namespace GameStore.Interfaces
         Product GetProduct(int id);
         void UpdateProduct(Product product);
         void UpdateAll(Product[] products);
+        void DeleteProduct(Product product);
     }
 }
