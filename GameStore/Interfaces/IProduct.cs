@@ -1,4 +1,5 @@
 ﻿using GameStore.Models;
+using GameStore.Models.Pages;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Interfaces
@@ -12,5 +13,6 @@ namespace GameStore.Interfaces
         void UpdateProduct(Product product);
         void UpdateAll(Product[] products);
         void DeleteProduct(Product product);
+        PagedList<Product> GetProducts(QueryOptions options);
     }
 }

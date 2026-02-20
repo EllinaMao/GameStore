@@ -1,10 +1,16 @@
 ﻿@{
 	ViewData["Title"] = "Все товары";
 }
-@model IQueryable<Product>
+@model IEnumerable<Product>
  
 <h3 class="p-2 bg-primary text-white text-center">Товары</h3>
 <div class="container">
+	@{
+		ViewBag.searches = new string[] { "Name", "Category.Name" };
+		ViewBag.sorts = new string[] { "Name", "Category.Name", "PurchasePrice", "RetailPrice" };
+	}
+	@Html.Partial("_PageOptions", Model)
+
 	<div class="row">
 		<div class="col fw-bold">Название</div>
 		<div class="col fw-bold">Категория</div>
@@ -12,7 +18,8 @@
 		<div class="col fw-bold">Розничная цена</div>
 		<div class="col"></div>
 	</div>
- 
+
+
 	@foreach (Product product in Model)
 	{
 		<div class="row р-2">
@@ -29,8 +36,15 @@
 			</div>
 		</div>
 	}
+
+	<div class="text-center">
+		@Html.Partial("_Pages", Model)
+	</div>
+
+
 	<div class="text-center р-2">
 		<a asp-action="UpdateProduct" asp-route-id="0" class="btn btn-primary">Добавить</a>
 	</div>
  
+
 </div>

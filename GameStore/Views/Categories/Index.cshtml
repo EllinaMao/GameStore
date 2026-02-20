@@ -1,0 +1,33 @@
+﻿@{
+	ViewData["Title"] = "Все Категории";
+}
+@model IQueryable<Category>
+ 
+<h3 class="p-2 bg-primary text-white text-center">Товары</h3>
+<div class="container">
+	<div class="row">
+		<div class="col fw-bold">Название</div>
+		<div class="col fw-bold">Описание</div>
+		<div class="col"></div>
+	</div>
+ 
+	@foreach (Category category in Model)
+	{
+		<div class="row р-2">
+			<div class="col">@category.Name</div>
+			<div class="col">@category.Description</div>
+
+			<div class="col">
+				<form asp-action="DeleteCategory" method="post">
+					<input type="hidden" name="Id" value="@category.Id">
+					<a asp-action="UpdateCategory" asp-route-id="@category.Id" class="btn btn-outline-primary">Редактировать</a>
+					<button type="submit" class="btn btn-outline-danger">Удалить</button>
+				</form>
+			</div>
+		</div>
+	}
+	<div class="text-center р-2">
+		<a asp-action="UpdateCategory" asp-route-id="0" class="btn btn-primary">Добавить</a>
+	</div>
+ 
+</div>

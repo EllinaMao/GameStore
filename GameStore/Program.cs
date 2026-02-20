@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationContext>(opts =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProduct, ProductRepository>();
+builder.Services.AddScoped<ICategory, CategoryRepository>();
+builder.Services.AddScoped<IOrder, OrderRepository>();
 
 var app = builder.Build();
 

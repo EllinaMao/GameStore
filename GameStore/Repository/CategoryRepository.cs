@@ -24,11 +24,25 @@ namespace GameStore.Repository
             _context.SaveChanges();
         }
 
+        //public void UpdateCategory(Category category)
+        //{
+        //    _context.Categories.Update(category);
+        //    _context.SaveChanges();
+        //}
+        public Category GetCategory(int id)
+        {
+            return _context.Categories.FirstOrDefault(e => e.Id == id);
+        }
+
         public void UpdateCategory(Category category)
         {
-            _context.Categories.Update(category);
+            Category category2 = GetCategory(category.Id);
+            category2.Name = category.Name;
+            category2.Description = category.Description;
+
             _context.SaveChanges();
         }
+
 
         public void DeleteCategory(Category category)
         {

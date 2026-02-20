@@ -1,5 +1,6 @@
 using GameStore.Interfaces;
 using GameStore.Models;
+using GameStore.Models.Pages;
 using Microsoft.AspNetCore.Mvc;
 
 public class HomeController : Controller
@@ -13,9 +14,9 @@ public class HomeController : Controller
         _categories = categories;
     }
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult Index(QueryOptions options)
     {
-        return View(_products.GetAllProducts());
+        return View(_products.GetProducts(options));
     }
     [HttpGet]
     public IActionResult UpdateProduct(int id)

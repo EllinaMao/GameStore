@@ -1,6 +1,7 @@
 ﻿using GameStore.Data;
 using GameStore.Interfaces;
 using GameStore.Models;
+using GameStore.Models.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,6 +40,10 @@ namespace GameStore.Repository
             product2.CategoryId = product.CategoryId;
             product2.RetailPrice = product.RetailPrice;
             product2.PurchasePrice = product.PurchasePrice;
+
+
+            _context.SaveChanges();
+
         }
 
         public void UpdateAll(Product[] products)
@@ -61,5 +66,9 @@ namespace GameStore.Repository
             _context.SaveChanges();
         }
 
+        public PagedList<Product> GetProducts(QueryOptions options)
+        {
+            return new PagedList<Product>(_context.Products.Include(e => e.Category), options);
+        }
     }
 }
