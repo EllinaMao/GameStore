@@ -16,6 +16,7 @@ namespace GameStore.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            Console.Clear();
             return View(_products.GetAllProducts());
         }
         [HttpPost]
@@ -24,5 +25,20 @@ namespace GameStore.Controllers
             _products.AddProduct(product);
             return RedirectToAction(nameof(Index));
         }
+
+
+        [HttpGet]
+        public IActionResult UpdateProduct(int id)
+        {
+            return View(_products.GetProduct(id));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProduct(Product product)
+        {
+            _products.UpdateProduct(product);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
