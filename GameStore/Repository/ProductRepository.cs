@@ -57,7 +57,7 @@ namespace GameStore.Repository
                 product.CategoryId = requestProduct.CategoryId;
                 product.RetailPrice = requestProduct.RetailPrice;
                 product.PurchasePrice = requestProduct.PurchasePrice;
-                
+
             }
             _context.SaveChanges();
         }
@@ -72,6 +72,19 @@ namespace GameStore.Repository
         public PagedList<Product> GetProducts(QueryOptions options)
         {
             return new PagedList<Product>(_context.Products.Include(e => e.Category), options);
+        }
+
+        public IEnumerable<Product> GetTopSellingProducts(int count)
+        {
+            return _context.Products
+                .Where(p => _context.OrderLines.Any(ol => ol.ProductId == p.Id))
+
+                .OrderByDescending(p => _context.OrderLines
+                    .Where(ol => ol.ProductId == p.Id)
+                    .Sum(ol => ol.Quantity))
+
+                .Take(count)
+                .ToList();
         }
     }
 }

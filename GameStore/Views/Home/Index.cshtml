@@ -10,9 +10,18 @@
 <h3 class="p-2 bg-primary text-white text-center">Товары</h3>
 <div class="container">
 	@Html.Partial("_PageOptions", Model)
-
 	@if (ViewBag.UpdateAll != true)
 	{
+		<button class="btn btn-secondary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#topSellingProducts" aria-expanded="false" aria-controls="topSellingProducts">
+			Показать топ 10 хитов продаж
+		</button>
+
+		<div class="collapse" id="topSellingProducts">
+			<div class="card card-body mb-3"> 
+				<vc:top-selling-products></vc:top-selling-products>
+			</div>
+		</div>
+		
 		<div class="row">
 			<div class="col fw-bold">Название</div>
 			<div class="col fw-bold">Категория</div>
@@ -55,6 +64,7 @@
 		<div class="text-center">
 			<a asp-action="UpdateAll" class="btn btn-primary">Редактировать все</a>
 		</div>
+		
 	}
 	else
 	{

@@ -32,7 +32,7 @@ public class OrdersController : Controller
     [HttpPost]
     public IActionResult AddOrUpdateOrder(Order order)
     {
-        order.Lines = order.Lines.Where(e => e.Id > 0 || (e.Id == 0 && e.Quantity > 0)).ToArray();
+        order.Lines = order.Lines?.Where(e => e.Id > 0 || (e.Id == 0 && e.Quantity > 0)).ToArray() ?? Array.Empty<OrderLine>(); ;
         if (order.Id == 0)
         {
             _orders.AddOrder(order);

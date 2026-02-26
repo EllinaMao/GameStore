@@ -13,6 +13,9 @@ namespace GameStore.Interfaces
         void UpdateProduct(Product product);
         void UpdateAll(Product[] products);
         void DeleteProduct(Product product);
+
+        IEnumerable<Product> GetTopSellingProducts(int count);
+
         PagedList<Product> GetProducts(QueryOptions options);
     }
 }
